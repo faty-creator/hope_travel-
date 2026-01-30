@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HopeTravel – Voyagez avec confiance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;900&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+        --yellow: #FBBF24;
+      }
+      body {
+        font-family: 'Poppins', sans-serif;
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      .font-arabic {
+        font-family: 'Cairo', sans-serif;
+      }
+      [dir="rtl"] {
+        font-family: 'Cairo', sans-serif;
+      }
+
+      /* Dark Mode Specifics */
+      .dark body {
+        background-color: #0f172a;
+        color: #f8fafc;
+      }
+      .dark .bg-white { background-color: #1e293b !important; }
+      .dark .bg-gray-50 { background-color: #0f172a !important; }
+      .dark .text-gray-900 { color: #f8fafc !important; }
+      .dark .text-gray-600 { color: #cbd5e1 !important; }
+      .dark .text-gray-700 { color: #e2e8f0 !important; }
+      .dark .border-gray-100 { border-color: #334155 !important; }
+      .dark .shadow-md, .dark .shadow-lg, .dark .shadow-xl, .dark .shadow-2xl {
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      /* Glow Effect */
+      .btn-glow {
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      .btn-glow:hover {
+        box-shadow: 0 0 15px var(--yellow), 0 0 30px var(--yellow);
+      }
+
+      /* Parallax effect */
+      .parallax {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      /* Reveal on Scroll */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .yellow-bg { background-color: #FBBF24; }
+      .yellow-text { color: #FBBF24; }
+      .yellow-border { border-color: #FBBF24; }
+      
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease-out forwards;
+      }
+
+      /* Accordion styles for FAQ */
+      .faq-details summary::-webkit-details-marker { display: none; }
+      .faq-details[open] summary svg { transform: rotate(180deg); }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.12.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
