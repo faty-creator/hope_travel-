@@ -15,10 +15,6 @@ A modern travel agency website built with React, Vite, and Supabase.
    ```bash
    git clone https://github.com/M-Abdelkabir/Hope_Travel2.git
    ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
 
 ## 🛠️ Local Development & Automation
 
