@@ -229,7 +229,7 @@ const Reservation: React.FC = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   className="w-full bg-gray-50 border-2 border-gray-100 rounded-2xl px-6 py-4 focus:border-yellow-400 focus:bg-white outline-none transition"
-                  placeholder="+212 ..."
+                  placeholder="+212 619677877"
                 />
               </div>
             </div>

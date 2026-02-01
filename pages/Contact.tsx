@@ -93,7 +93,7 @@ const Contact: React.FC = () => {
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <div className="w-12 h-12 yellow-bg flex items-center justify-center rounded-2xl mb-6 text-2xl">💬</div>
                 <h3 className="font-bold mb-2">{t('contact_whatsapp')}</h3>
-                <p className="text-gray-500">+212 600 000 001</p>
+                <p className="text-gray-500">+212 619677877</p>
               </div>
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <div className="w-12 h-12 yellow-bg flex items-center justify-center rounded-2xl mb-6 text-2xl">📧</div>

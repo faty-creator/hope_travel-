@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   const socials = [
-    { id: 'whatsapp', icon: 'fab fa-whatsapp', url: 'https://wa.me/212600000000' },
+    { id: 'whatsapp', icon: 'fab fa-whatsapp', url: 'https://wa.me/212619677877' },
     { id: 'instagram', icon: 'fab fa-instagram', url: 'https://instagram.com/hopetravel' },
     { id: 'tiktok', icon: 'fab fa-tiktok', url: 'https://tiktok.com/@hopetravel' },
     { id: 'facebook', icon: 'fab fa-facebook-f', url: 'https://facebook.com/hopetravel' }
