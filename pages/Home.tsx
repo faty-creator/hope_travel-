@@ -78,54 +78,74 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Parallax Hero Section */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden parallax" style={{ backgroundImage: "url('https://www.pexels.com/download/video/34889526/')" }}>
-        <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
+{/* Parallax Hero Section */}
+<section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
+  {/* Video Background */}
+  <video
+    className="absolute top-0 left-0 w-full h-full object-cover"
+    autoPlay
+    loop
+    muted
+    playsInline
+  >
+    <source src="https://www.example.com/videos/34889526.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 
-        <div className="relative z-10 text-center text-white px-4 max-w-4xl animate-fade-in-up">
-          <h1 className="text-4xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
-            {t('hero_title')}
-          </h1>
-          <p className="text-lg md:text-2xl mb-10 text-gray-100 drop-shadow-md">
-            {t('hero_subtitle')}
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link
-              to="/trips"
-              className="yellow-bg text-black px-10 py-4 rounded-full text-xl font-bold shadow-2xl hover:bg-white transition transform hover:scale-105 btn-glow"
-            >
-              {t('btn_see_trips')}
-            </Link>
-            <Link
-              to="/reserve"
-              className="bg-white/20 backdrop-blur-md text-white border-2 border-white px-10 py-4 rounded-full text-xl font-bold hover:bg-white hover:text-black transition transform hover:scale-105"
-            >
-              {t('btn_book_now')}
-            </Link>
-          </div>
-        </div>
-      </section>
+  {/* Overlay */}
+  <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
 
-      {/* Advantages Section with Reveal */}
-      <section className="py-24 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 reveal">{t('adv_title')}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { icon: <Icons.Guide />, title: t('adv_guides'), text: t('home_adv_guides_desc') },
-              { icon: <Icons.Bus />, title: t('adv_transport'), text: t('home_adv_transport_desc') },
-              { icon: <Icons.Star />, title: t('adv_prices'), text: t('home_adv_prices_desc') }
-            ].map((adv, i) => (
-              <div key={i} className="text-center p-8 rounded-2xl bg-gray-50 dark:bg-slate-800 border border-transparent hover:yellow-border hover:bg-white dark:hover:bg-slate-700 transition duration-500 shadow-sm hover:shadow-xl reveal" style={{ transitionDelay: `${i * 100}ms` }}>
-                <div className="yellow-bg text-black w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 btn-glow">
-                  {adv.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-4 dark:text-white">{adv.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{adv.text}</p>
-              </div>
-            ))}
+  {/* Content */}
+  <div className="relative z-10 text-center text-white px-4 max-w-4xl animate-fade-in-up">
+    <h1 className="text-4xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
+      {t('hero_title')}
+    </h1>
+    <p className="text-lg md:text-2xl mb-10 text-gray-100 drop-shadow-md">
+      {t('hero_subtitle')}
+    </p>
+    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <Link
+        to="/trips"
+        className="yellow-bg text-black px-10 py-4 rounded-full text-xl font-bold shadow-2xl hover:bg-white transition transform hover:scale-105 btn-glow"
+      >
+        {t('btn_see_trips')}
+      </Link>
+      <Link
+        to="/reserve"
+        className="bg-white/20 backdrop-blur-md text-white border-2 border-white px-10 py-4 rounded-full text-xl font-bold hover:bg-white hover:text-black transition transform hover:scale-105"
+      >
+        {t('btn_book_now')}
+      </Link>
+    </div>
+  </div>
+</section>
+
+{/* Advantages Section with Reveal */}
+<section className="py-24 bg-white dark:bg-slate-900">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 reveal">{t('adv_title')}</h2>
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      {[
+        { icon: <Icons.Guide />, title: t('adv_guides'), text: t('home_adv_guides_desc') },
+        { icon: <Icons.Bus />, title: t('adv_transport'), text: t('home_adv_transport_desc') },
+        { icon: <Icons.Star />, title: t('adv_prices'), text: t('home_adv_prices_desc') }
+      ].map((adv, i) => (
+        <div
+          key={i}
+          className="text-center p-8 rounded-2xl bg-gray-50 dark:bg-slate-800 border border-transparent hover:yellow-border hover:bg-white dark:hover:bg-slate-700 transition duration-500 shadow-sm hover:shadow-xl reveal"
+          style={{ transitionDelay: `${i * 100}ms` }}
+        >
+          <div className="yellow-bg text-black w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 btn-glow">
+            {adv.icon}
           </div>
+          <h3 className="text-xl font-bold mb-4 dark:text-white">{adv.title}</h3>
+          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{adv.text}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Newsletter Section */}
       <section className="py-24 bg-yellow-400">
