@@ -93,7 +93,7 @@ const Contact: React.FC = () => {
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <div className="w-12 h-12 yellow-bg flex items-center justify-center rounded-2xl mb-6 text-2xl">💬</div>
                 <h3 className="font-bold mb-2">{t('contact_whatsapp')}</h3>
-                <p className="text-gray-500">+212 619677877</p>
+                <p className="text-gray-500">+212 600 000 001</p>
               </div>
               <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
                 <div className="w-12 h-12 yellow-bg flex items-center justify-center rounded-2xl mb-6 text-2xl">📧</div>
@@ -110,14 +110,13 @@ const Contact: React.FC = () => {
             <div className="h-64 rounded-[2.5rem] overflow-hidden shadow-lg border-8 border-white">
               <iframe
                 title="Google Map"
-                src="https://maps.app.goo.gl/ScmFbP2FKp9iHZBM8"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d106381.12185527656!2d-7.65349389333555!3d33.57311041103756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda7cd4778aa113b%3A0xb06c1d84f310fd3!2sCasablanca!5e0!3m2!1sfr!2sma!4v1620000000000!5m2!1sfr!2sma"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
               ></iframe>
-              
             </div>
           </div>
         </div>
