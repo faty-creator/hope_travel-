@@ -78,7 +78,7 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Parallax Hero Section */}
-      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden parallax" style={{ backgroundImage: "url('https://www.pexels.com/video/sun-setting-down-855946/')" }}>
+      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden parallax" style={{ backgroundImage: "url('https://www.pexels.com/download/video/34889526/')" }}>
         <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
 
         <div className="relative z-10 text-center text-white px-4 max-w-4xl animate-fade-in-up">
