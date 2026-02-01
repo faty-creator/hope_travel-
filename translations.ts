@@ -51,7 +51,7 @@ export const translations: Translation = {
   newsletter_success: { fr: 'Merci pour votre inscription !', ar: 'شكراً لاشتراكك!', en: 'Thanks for subscribing!' },
   brochure_title: { fr: 'Téléchargez notre Brochure', ar: 'تحميل كتيبنا', en: 'Download our Brochure' },
   brochure_desc: { fr: 'Scannez le QR code pour voir nos programmes détaillés.', ar: 'امسح رمز QR لمشاهدة برامجنا التفصيلية.', en: 'Scan the QR code to see our detailed programs.' },
-  topbar_phone: { fr: '+212 537 712 108', ar: '+212 537 712 108', en: '+212 537 712 108' },
+  topbar_phone: { fr: '+212 619677877', ar: '+212 619677877', en: '+212 619677877' },
   topbar_hours: { fr: "Nous sommes ouverts aujourd'hui de 09h00 à 19h00", ar: "نحن مفتوحون اليوم من الساعة 09:00 صباحاً حتى 07:00 مساءً", en: "We are open today from 09:00 AM to 07:00 PM" },
 
   // Home Page
@@ -98,5 +98,5 @@ export const translations: Translation = {
 
   // Footer & Misc
   footer_rights: { fr: 'Tous droits réservés.', ar: 'جميع الحقوق محفوظة.', en: 'All rights reserved.' },
-  footer_address_city: { fr: 'Casablanca, Maroc', ar: 'الدار البيضاء، المغرب', en: 'Casablanca, Morocco' }
+  footer_address_city: { fr: 'Marrakech, Maroc', ar: 'مراكش ، المغرب', en: 'Marrakesh, Morocco' }
 };

@@ -115,9 +115,6 @@ const App: React.FC = () => {
       USD: '$'
     };
 
-    // Convert source to MAD first (since rates are based on MAD = 1)
-    // Rate: 1 MAD = 0.093 EUR -> 1 EUR = 1/0.093 MAD
-
     let priceInMad = price;
     if (sourceCurrency !== 'MAD') {
       priceInMad = price / rates[sourceCurrency];
