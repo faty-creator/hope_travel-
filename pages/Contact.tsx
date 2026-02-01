@@ -108,8 +108,17 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="h-64 rounded-[2.5rem] overflow-hidden shadow-lg border-8 border-white">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103607.67053224081!2d-8.090254583881107!3d31.634594989247148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakech!5e1!3m2!1sfr!2sma!4v1769986391059!5m2!1sfr!2sma" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+  <iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d103607.67053224081!2d-8.090254583881107!3d31.634594989247148!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafee8d96179e51%3A0x5950b6534f87adb8!2sMarrakech!5e1!3m2!1sfr!2sma!4v1769986391059!5m2!1sfr!2sma"
+    width="600"
+    height="450"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+  ></iframe>
+</div>
+
           </div>
         </div>
       </div>
