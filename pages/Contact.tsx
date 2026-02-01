@@ -108,7 +108,7 @@ const Contact: React.FC = () => {
             </div>
 
             <div className="h-64 rounded-[2.5rem] overflow-hidden shadow-lg border-8 border-white">
-              {/* <iframe
+              <iframe
                 title="Google Map"
                 src="https://maps.app.goo.gl/ScmFbP2FKp9iHZBM8"
                 width="100%"
@@ -116,10 +116,8 @@ const Contact: React.FC = () => {
                 style={{ border: 0 }}
                 allowFullScreen={true}
                 loading="lazy"
-              ></iframe> */}
-              <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3202.6247929124775!2d-8.03525076393992!3d31.593241774596677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sMarrakech%20mhamid%20saada%204!5e1!3m2!1sfr!2sma!4v1769985768548!5m2!1sfr!2sma" 
-               width="100%"
-                height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              ></iframe>
+              
             </div>
           </div>
         </div>
