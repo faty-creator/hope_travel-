@@ -52,7 +52,7 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row justify-between items-center text-[10px] md:text-xs font-bold text-slate-800 dark:text-slate-300 space-y-1 sm:space-y-0 tracking-tight uppercase">
             <div className="flex items-center space-x-5 rtl:space-x-reverse">
-              <a href="tel:+212537712108" className="flex items-center hover:yellow-text transition-colors duration-200">
+              <a href="tel:+212619677877" className="flex items-center hover:yellow-text transition-colors duration-200">
                 <span className="text-yellow-500 mr-1.5 rtl:mr-0 rtl:ml-1.5">📞</span> {t('topbar_phone')}
               </a>
               <span className="hidden sm:inline-block opacity-20">|</span>
