@@ -1,29 +1,31 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useLanguage, useCurrency } from '../App';
 import { supabase } from '../lib/supabase';
 import { Trip } from '../types';
-import { Icons, TRIPS } from '../constants';
+import { Icons } from '../constants';
 
 const TESTIMONIALS = [
   {
     text: "Un service impeccable, des paysages grandioses et une organisation parfaite.",
     author: "Fatima-Zahra",
     role: "Voyageuse régulière",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200"
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=400",
+    rating: 5
   },
   {
     text: "Une expérience humaine incroyable. Le guide était passionné et le transport très confortable.",
     author: "Marc Lefebvre",
     role: "Touriste",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+    rating: 5
   },
   {
     text: "Meilleure agence pour découvrir le sud du Maroc. Je recommande vivement HopeTravel !",
     author: "Yassine Benali",
     role: "Aventurier",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200"
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+    rating: 5
   }
 ];
 
@@ -34,6 +36,8 @@ const Home: React.FC = () => {
   const [newsEmail, setNewsEmail] = useState('');
   const [newsSuccess, setNewsSuccess] = useState(false);
   const [featuredTrips, setFeaturedTrips] = useState<Trip[]>([]);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 50, y: 50 });
 
   useEffect(() => {
     fetchFeaturedTrips();
@@ -49,7 +53,6 @@ const Home: React.FC = () => {
 
       if (data) {
         setFeaturedTrips(data);
-        // Trigger reveal animation
         setTimeout(() => {
           window.dispatchEvent(new Event('scroll'));
         }, 100);
@@ -66,6 +69,18 @@ const Home: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (testimonialsRef.current) {
+      const rect = testimonialsRef.current.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      setMousePosition({
+        x: Math.max(0, Math.min(100, x)),
+        y: Math.max(0, Math.min(100, y))
+      });
+    }
+  };
+
   const handleNewsSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (newsEmail) {
@@ -78,74 +93,54 @@ const Home: React.FC = () => {
   return (
     <div className="overflow-hidden">
       {/* Parallax Hero Section */}
-{/* Parallax Hero Section */}
-<section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
-  {/* Video Background */}
-  <video
-    className="absolute top-0 left-0 w-full h-full object-cover"
-    autoPlay
-    loop
-    muted
-    playsInline
-  >
-    <source src="https://www.example.com/videos/34889526.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+      <section className="relative h-[85vh] flex items-center justify-center overflow-hidden parallax" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=2000')" }}>
+        <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
 
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black/40 dark:bg-black/60"></div>
-
-  {/* Content */}
-  <div className="relative z-10 text-center text-white px-4 max-w-4xl animate-fade-in-up">
-    <h1 className="text-4xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
-      {t('hero_title')}
-    </h1>
-    <p className="text-lg md:text-2xl mb-10 text-gray-100 drop-shadow-md">
-      {t('hero_subtitle')}
-    </p>
-    <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-      <Link
-        to="/trips"
-        className="yellow-bg text-black px-10 py-4 rounded-full text-xl font-bold shadow-2xl hover:bg-white transition transform hover:scale-105 btn-glow"
-      >
-        {t('btn_see_trips')}
-      </Link>
-      <Link
-        to="/reserve"
-        className="bg-white/20 backdrop-blur-md text-white border-2 border-white px-10 py-4 rounded-full text-xl font-bold hover:bg-white hover:text-black transition transform hover:scale-105"
-      >
-        {t('btn_book_now')}
-      </Link>
-    </div>
-  </div>
-</section>
-
-{/* Advantages Section with Reveal */}
-<section className="py-24 bg-white dark:bg-slate-900">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 reveal">{t('adv_title')}</h2>
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-      {[
-        { icon: <Icons.Guide />, title: t('adv_guides'), text: t('home_adv_guides_desc') },
-        { icon: <Icons.Bus />, title: t('adv_transport'), text: t('home_adv_transport_desc') },
-        { icon: <Icons.Star />, title: t('adv_prices'), text: t('home_adv_prices_desc') }
-      ].map((adv, i) => (
-        <div
-          key={i}
-          className="text-center p-8 rounded-2xl bg-gray-50 dark:bg-slate-800 border border-transparent hover:yellow-border hover:bg-white dark:hover:bg-slate-700 transition duration-500 shadow-sm hover:shadow-xl reveal"
-          style={{ transitionDelay: `${i * 100}ms` }}
-        >
-          <div className="yellow-bg text-black w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 btn-glow">
-            {adv.icon}
+        <div className="relative z-10 text-center text-white px-4 max-w-4xl animate-fade-in-up">
+          <h1 className="text-4xl md:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
+            {t('hero_title')}
+          </h1>
+          <p className="text-lg md:text-2xl mb-10 text-gray-100 drop-shadow-md">
+            {t('hero_subtitle')}
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              to="/trips"
+              className="yellow-bg text-black px-10 py-4 rounded-full text-xl font-bold shadow-2xl hover:bg-white transition transform hover:scale-105 btn-glow"
+            >
+              {t('btn_see_trips')}
+            </Link>
+            <Link
+              to="/reserve"
+              className="bg-white/20 backdrop-blur-md text-white border-2 border-white px-10 py-4 rounded-full text-xl font-bold hover:bg-white hover:text-black transition transform hover:scale-105"
+            >
+              {t('btn_book_now')}
+            </Link>
           </div>
-          <h3 className="text-xl font-bold mb-4 dark:text-white">{adv.title}</h3>
-          <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{adv.text}</p>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
+      {/* Advantages Section with Reveal */}
+      <section className="py-24 bg-white dark:bg-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-5xl font-bold text-center mb-16 reveal">{t('adv_title')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {[
+              { icon: <Icons.Guide />, title: t('adv_guides'), text: t('home_adv_guides_desc') },
+              { icon: <Icons.Bus />, title: t('adv_transport'), text: t('home_adv_transport_desc') },
+              { icon: <Icons.Star />, title: t('adv_prices'), text: t('home_adv_prices_desc') }
+            ].map((adv, i) => (
+              <div key={i} className="text-center p-8 rounded-2xl bg-gray-50 dark:bg-slate-800 border border-transparent hover:yellow-border hover:bg-white dark:hover:bg-slate-700 transition duration-500 shadow-sm hover:shadow-xl reveal" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="yellow-bg text-black w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 transform rotate-3 btn-glow">
+                  {adv.icon}
+                </div>
+                <h3 className="text-xl font-bold mb-4 dark:text-white">{adv.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{adv.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Newsletter Section */}
       <section className="py-24 bg-yellow-400">
@@ -218,57 +213,102 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-32 bg-[#0a0f1d] dark:bg-[#020617] text-white overflow-hidden relative reveal">
-        <div className="max-w-6xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
-            <div className="flex justify-center space-x-1 mb-6">
-              {[1, 2, 3, 4, 5].map(n => <Icons.Star key={n} />)}
-            </div>
-            <h2 className="text-3xl md:text-5xl font-black mb-4">{t('home_testimonials_title')}</h2>
-            <div className="w-20 h-1 yellow-bg mx-auto"></div>
+      {/* Testimonials - Version Compacte et Moderne */}
+      <section 
+        ref={testimonialsRef}
+        className="relative py-20 bg-gradient-to-br from-[#0a0f1d] via-[#0c1224] to-[#090e1a] text-white overflow-hidden"
+        onMouseMove={handleMouseMove}
+      >
+        {/* Effet de lumière interactive */}
+        <div 
+          className="pointer-events-none fixed inset-0 z-0 transition-opacity duration-300"
+          style={{
+            background: `radial-gradient(400px at ${mousePosition.x}% ${mousePosition.y}%, rgba(251, 191, 36, 0.1), transparent 50%)`,
+          }}
+        />
+
+        <div className="relative z-10 max-w-5xl mx-auto px-4">
+          {/* En-tête simplifié */}
+          <div className="text-center mb-16 relative">
+            <h2 className="text-3xl md:text-5xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 via-amber-300 to-orange-300">
+              {t('home_testimonials_title')}
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 via-orange-500 to-amber-400 mx-auto rounded-full"></div>
+            <p className="text-gray-400 mt-4 max-w-2xl mx-auto">
+              Ce que disent nos voyageurs
+            </p>
           </div>
 
-          <div className="relative min-h-[450px] md:min-h-[400px]">
+          {/* Conteneur de témoignages compact */}
+          <div className="relative min-h-[400px] md:min-h-[350px]">
             {TESTIMONIALS.map((testimonial, idx) => {
               const translatedTestimonial = {
                 text: idx === 0 ? t('home_testimonial_1_text') : idx === 1 ? t('home_testimonial_2_text') : t('home_testimonial_3_text'),
                 role: idx === 0 ? t('home_testimonial_1_role') : idx === 1 ? t('home_testimonial_2_role') : t('home_testimonial_3_role'),
                 author: testimonial.author,
-                image: testimonial.image
+                image: testimonial.image,
+                rating: testimonial.rating
               };
 
               return (
                 <div
                   key={idx}
-                  className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-700 ease-in-out transform ${idx === activeSlide
-                    ? 'opacity-100 translate-y-0 scale-100'
-                    : 'opacity-0 translate-y-8 scale-95 pointer-events-none'
-                    }`}
+                  className={`absolute inset-0 flex items-center justify-center transition-all duration-700 ease-out ${
+                    idx === activeSlide
+                      ? 'opacity-100 translate-x-0 scale-100 z-10'
+                      : 'opacity-0 translate-x-full scale-95 pointer-events-none'
+                  }`}
                 >
-                  <div className="bg-[#111827]/80 dark:bg-slate-900/50 backdrop-blur-xl border border-white/5 p-10 md:p-16 rounded-[3rem] shadow-2xl text-center max-w-4xl w-full">
-                    <blockquote className="text-2xl md:text-4xl font-bold mb-12 italic leading-relaxed text-gray-100">
-                      "{translatedTestimonial.text}"
-                    </blockquote>
+                  {/* Carte plus petite et compacte */}
+                  <div className="relative w-full max-w-2xl group">
+                    {/* Carte principale */}
+                    <div className="relative bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/10 shadow-xl overflow-hidden">
+                      
+                      {/* Points décoratifs subtils */}
+                      <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-yellow-400/10 to-orange-500/10 rounded-full blur-xl" />
+                      <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-amber-500/5 to-transparent rounded-full blur-xl" />
 
-                    <div className="flex flex-col items-center space-y-4">
+                      {/* Citation compacte */}
                       <div className="relative">
-                        <div className="absolute inset-0 yellow-bg rounded-full blur-lg opacity-20 animate-pulse"></div>
-                        <div className="relative w-24 h-24 rounded-full border-4 border-yellow-400 overflow-hidden shadow-2xl mb-4">
-                          <img
-                            src={translatedTestimonial.image}
-                            alt={translatedTestimonial.author}
-                            className="w-full h-full object-cover"
-                          />
-                        </div>
-                      </div>
+                        <div className="absolute -top-4 -left-4 text-6xl text-yellow-400/10 font-serif">"</div>
+                        
+                        <blockquote className="relative text-xl md:text-2xl font-semibold leading-relaxed mb-8 pl-8 pr-4">
+                          <span className="text-gray-100">
+                            "{translatedTestimonial.text}"
+                          </span>
+                        </blockquote>
 
-                      <div className="flex flex-col items-center">
-                        <h4 className="text-2xl font-black text-white mb-1">{translatedTestimonial.author}</h4>
-                        <div className="flex items-center space-x-2 text-yellow-400 font-bold uppercase tracking-widest text-sm">
-                          <span className="w-6 h-[2px] bg-yellow-400"></span>
-                          <span>{translatedTestimonial.role}</span>
-                          <span className="w-6 h-[2px] bg-yellow-400"></span>
+                        {/* Auteur compact */}
+                        <div className="flex items-center gap-4">
+                          {/* Avatar plus petit */}
+                          <div className="relative">
+                            <div className="relative w-16 h-16 rounded-full border-2 border-yellow-400/30 overflow-hidden bg-gradient-to-br from-gray-900 to-black shadow-lg">
+                              <img
+                                src={translatedTestimonial.image}
+                                alt={translatedTestimonial.author}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+                          </div>
+
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold mb-1 text-white">
+                              {translatedTestimonial.author}
+                            </h4>
+                            <div className="flex items-center gap-2">
+                              <div className="w-6 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full" />
+                              <span className="text-sm font-medium uppercase tracking-wide text-gray-300">
+                                {translatedTestimonial.role}
+                              </span>
+                              <div className="w-6 h-0.5 bg-gradient-to-r from-orange-500 to-yellow-400 rounded-full" />
+                            </div>
+                          </div>
+
+                          {/* Rating compact */}
+                          <div className="flex items-center gap-2 bg-white/5 px-3 py-2 rounded-lg">
+                            <Icons.Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                            <span className="text-sm font-bold text-white">5.0</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -278,22 +318,65 @@ const Home: React.FC = () => {
             })}
           </div>
 
-          <div className="flex justify-center mt-12 space-x-4 rtl:space-x-reverse">
-            {TESTIMONIALS.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveSlide(idx)}
-                className={`h-2 rounded-full transition-all duration-500 ease-out ${idx === activeSlide ? 'yellow-bg w-12' : 'bg-gray-700 w-3 hover:bg-gray-500'
-                  }`}
-                aria-label={`Go to slide ${idx + 1}`}
+          {/* Contrôles de navigation avec points au centre */}
+          <div className="flex items-center justify-center gap-8 mt-12">
+            {/* Flèche gauche */}
+            <button
+              onClick={() => setActiveSlide(prev => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length)}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:border-yellow-400/50 hover:scale-110 transition-all duration-300 group"
+            >
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-yellow-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Points de navigation au centre */}
+            <div className="flex gap-3">
+              {TESTIMONIALS.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveSlide(idx)}
+                  className="relative group"
+                  aria-label={`Témoignage ${idx + 1}`}
+                >
+                  <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    idx === activeSlide 
+                      ? 'bg-gradient-to-r from-yellow-400 to-orange-500 scale-125' 
+                      : 'bg-gray-700 group-hover:bg-gray-600'
+                  }`}>
+                    {idx === activeSlide && (
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 animate-ping opacity-75" />
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+
+            {/* Flèche droite */}
+            <button
+              onClick={() => setActiveSlide(prev => (prev + 1) % TESTIMONIALS.length)}
+              className="w-12 h-12 rounded-full bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:border-yellow-400/50 hover:scale-110 transition-all duration-300 group"
+            >
+              <svg className="w-5 h-5 text-gray-400 group-hover:text-yellow-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Indicateur de progression compact */}
+          <div className="mt-8">
+            <div className="relative h-1 bg-white/5 rounded-full overflow-hidden max-w-xs mx-auto">
+              <div 
+                className="absolute top-0 left-0 h-full bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full transition-all duration-700 ease-out"
+                style={{ width: `${((activeSlide + 1) / TESTIMONIALS.length) * 100}%` }}
               />
-            ))}
+            </div>
           </div>
         </div>
 
-        <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-gray-50 dark:from-slate-800 to-transparent opacity-10"></div>
-        <div className="absolute top-1/2 left-0 w-[600px] h-[600px] yellow-bg rounded-full blur-[180px] opacity-[0.05] -translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] yellow-bg rounded-full blur-[150px] opacity-[0.03] translate-x-1/2 translate-y-1/2 pointer-events-none"></div>
+        {/* Éléments décoratifs subtils */}
+        <div className="absolute bottom-5 left-5 w-48 h-48 bg-gradient-to-tr from-yellow-400/3 to-transparent rounded-full blur-2xl" />
+        <div className="absolute top-5 right-5 w-56 h-56 bg-gradient-to-bl from-orange-500/2 to-transparent rounded-full blur-2xl" />
       </section>
     </div>
   );
